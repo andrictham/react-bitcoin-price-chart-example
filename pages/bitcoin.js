@@ -29,6 +29,7 @@ class App extends React.Component {
     fetch('https://api.coindesk.com/v1/bpi/historical/close.json')
     .then(res => res.json())
     .then(json => {
+      console.log(json)
       this.setState({
         data: json
       })
@@ -37,12 +38,31 @@ class App extends React.Component {
   render () {
     const { screenWidth, screenHeight } = this.props
     const { data } = this.state
+
+    if(!data.bpi) {
+      return <div>Loading...</div>
+    }
+
+    // Reformat data.bpi to an object with separate date and price
+    const prices = Object.keys(data.bpi).map(key => {
+      return {
+        date: key,
+        price: data.bpi[key]
+      }
+    })
+
+    // Get the price of the last item in “prices” array
+    const currentPrice = prices[prices.length - 1].price
+
     return (
       <div className="app">
         <Background width={screenWidth} height={screenHeight}/>
         <div className="center">
           <div className="chart">
-            <div className="title">Bitcoin Price</div>
+            <div className="title">
+              <div>Bitcoin Price</div>
+              <div>{currentPrice}</div>
+            </div>
             <div className="chart-container">
               <Chart data={data} ></Chart>
             </div>
