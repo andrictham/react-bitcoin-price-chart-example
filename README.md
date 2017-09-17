@@ -1,4 +1,4 @@
-# Bitcoin Chart Tutorial
+# Bitcoin Chart Example
 
 Following this tutorial from [@hshoff](https://twitter.com/hshoff):
 [https://www.youtube.com/watch?v=oeE2tuspdHg](https://www.youtube.com/watch?v=oeE2tuspdHg)
